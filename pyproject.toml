@@ -1,0 +1,5 @@
+[project]
+name = "spotify-album-catalog"
+version = "0.1"
+description = "Ability to catalog albums like playlists"
+license = "MIT"
