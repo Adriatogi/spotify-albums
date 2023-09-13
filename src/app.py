@@ -5,23 +5,17 @@ import os
 
 from spotipy.oauth2 import SpotifyOAuth
 
+spot_secret = os.environ["SPOT_SECRET"]
+spot_id = os.environ["SPOT_ID"]
+
 
 class App:
     def __init__(self):
-        self._username = 0
         self._local_save_path = "local_save.json"
         self._data = {}
 
         self.load()
-
-    @property
-    def username(self):
-        return self._username
-
-    # a setter function
-    @username.setter
-    def username(self, name):
-        self._username = name
+        self.connect()
 
     @property
     def labels(self):
@@ -40,20 +34,18 @@ class App:
     def sp(self):
         return self._sp
 
-    # a setter function
-    @sp.setter
-    def sp(self, sp):
-        self._sp = sp
-
     def connect(self):
         self._sp = spotipy.Spotify(
             auth_manager=SpotifyOAuth(
-                client_id="a54b14253162438da6b02c60df8c38f3",
-                client_secret="22d666c05d114b368763eb0b5ae9e9ee",
+                client_id=spot_id,
+                client_secret=spot_secret,
                 redirect_uri="http://127.0.0.1:9090",
                 scope="user-library-read",
             )
         )
+
+    def get_user(self):
+        return self._sp.current_user()
 
     def save(self, path=""):
         path = self._local_save_path if (not path) else path
@@ -73,7 +65,7 @@ class App:
             with open(path, "r") as json_file:
                 self._data = json.load(json_file)
 
-            # Assume it holds info
+            # Assume it holds info (Probably make a try except that exits the program)
             # self._label_map = self._data["label_map"]
             self._labels = self._data["labels"]
         else:
