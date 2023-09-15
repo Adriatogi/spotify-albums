@@ -14,7 +14,8 @@ def cli(ctx):
 @click.pass_obj
 def pl(app):
     labels = app.labels
-    print(labels)
+    print("pl Labels: labels")
+    return labels
 
 
 @cli.command(name="al")  # add label
@@ -30,7 +31,8 @@ def add_label(app, label):
 @click.pass_obj
 def test(app):
     click.echo("Testing command")
-    app.local_save = ""
+    labels = cli(["pl"], standalone_mode=False)
+    print(labels)
 
 
 @cli.command(name="d")
