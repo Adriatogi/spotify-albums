@@ -5,7 +5,7 @@ interface labelProp {
     updateLabels: (newLabels: string[]) => void;
 }
 
-const LabelButton = ({ labelList, updateLabels }: labelProp) => {
+function LabelButton({ labelList, updateLabels }: labelProp) {
     const [isLoading, setIsLoading] = useState(false);
 
     const labelApiRequest = () => {
