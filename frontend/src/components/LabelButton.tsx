@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+
 
 interface labelProp {
     labelList: string[];
@@ -34,9 +36,9 @@ function LabelButton({ labelList, updateLabels }: labelProp) {
 
     return (
         <div>
-            <button onClick={labelApiRequest} disabled={isLoading}>
+            <Button variant="outline-primary" onClick={labelApiRequest} disabled={isLoading} style={{ margin: '10px' }}>
                 {isLoading ? 'Loading...' : 'Get Labels'}
-            </button>
+            </Button>
         </div>
     );
 };

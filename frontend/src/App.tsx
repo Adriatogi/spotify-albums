@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import LabelButton from './components/LabelButton';
 import './App.css';
+import Card from "react-bootstrap/Card"
 
 function App() {
   const [labels, setLabels] = useState<string[]>([]);
@@ -28,17 +30,19 @@ function App() {
       <LabelButton labelList={labels} updateLabels={updateLabels} />
       {labels.length > 0 ?
         (
-          <div>
-            <ul>
-              {labels.map((item, index) => (
-                <li key={index}>{item}</li>
-              ))}
-            </ul>
-          </div>
+          <div className="labels"> {
+            labels.map((label, index) =>
+              <React.Fragment key={index}>
+                <Card className="text-center" style={{ width: '5rem' }}>
+                  <Card.Text>{label}</Card.Text>
+                </Card>
+              </React.Fragment>
+            )
+          } </div>
         ) : (<p>No labels.</p>)
       }
 
-    </div>
+    </div >
   );
 }
 
