@@ -1,44 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import LabelButton from './components/LabelButton';
+import LabelsComponent from './components/Labels'
 import './App.css';
-import Card from "react-bootstrap/Card"
+import { useAppDispatch, useAppSelector } from './redux/hooks';
+import { fetchData } from './redux/actions';
+
 
 function App() {
-  const [labels, setLabels] = useState<string[]>([]);
-  const [message, setMessage] = useState("");
-
-  const updateLabels = (newLabels: string[]) => {
-    setLabels(newLabels);
-  };
+  const labels = useAppSelector((state) => state.app.labels);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    // Using fetch to fetch the api from
-    // flask server it will be redirected to proxy
-    fetch("/ping").then((res) =>
-      res.json().then((data) => {
-        // Setting a data from api
-        setMessage(data.message);
-      })
-    );
+    // Dispatch the fetchData action when the app loads
+    dispatch(fetchData());
   }, []);
 
   return (
     <div className="App">
       <h1>Spotify Album Catalog</h1>
-      <p>{message}</p>
-      <LabelButton labelList={labels} updateLabels={updateLabels} />
+      <LabelButton />
       {labels.length > 0 ?
         (
-          <div className="labels"> {
-            labels.map((label, index) =>
-              <React.Fragment key={index}>
-                <Card className="text-center" style={{ width: '5rem' }}>
-                  <Card.Text>{label}</Card.Text>
-                </Card>
-              </React.Fragment>
-            )
-          } </div>
+          <div className="labelsComponent">
+            <LabelsComponent />
+          </div>
         ) : (<p>No labels.</p>)
       }
 
