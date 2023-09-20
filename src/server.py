@@ -11,7 +11,7 @@ app = Flask(__name__)
 @app.route("/labels", methods=["GET", "POST"])
 def label():
     if request.method == "GET":
-        labels = cli(["pl"], standalone_mode=False)
+        labels = cli(["gl"], standalone_mode=False)
         return jsonify({"labels": labels})
 
 
