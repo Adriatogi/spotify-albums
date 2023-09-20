@@ -12,25 +12,42 @@ const fetchDataSuccess = (data: any) => ({
     payload: data,
 });
 
-const fetchDataFailure = (error: any) => ({
-    type: FETCH_DATA_FAILURE,
-    payload: error,
-});
-
 export const fetchData = () => {
     return async (dispatch: any) => {
-        fetch("/labels", {
-            method: 'GET', // You can use other HTTP methods like POST, PUT, etc.
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                // handle labels
-                console.log(data)
-                dispatch(fetchDataSuccess(data.labels));
+        try {
+            const response = await fetch("/labels", {
+                method: 'GET'
             })
-            .catch((error) => {
-                console.log('error: ', error)
-            });
+
+            if (!response.ok) {
+                throw new Error(`Request failed with status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log(data)
+            dispatch(fetchDataSuccess(data.labels));
+        } catch (error) {
+            console.log('error: ', error)
+        }
+    }
+}
+
+export const postLabel = (formData: any) => {
+    return async (dispatch: any) => {
+        try {
+            const response = await fetch("/labels", {
+                method: 'POST',
+                body: formData
+            })
+
+            if (!response.ok) {
+                throw new Error(`Request failed with status: ${response.status}`);
+            }
+
+        } catch (error) {
+            console.log('error: ', error)
+        }
+        dispatch(fetchData())
     }
 }
 

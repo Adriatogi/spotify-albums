@@ -1,27 +1,34 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { useAppDispatch } from '../redux/hooks';
-import { addLabel } from '../redux/actions';
+import { postLabel } from '../redux/actions';
 
 function LabelButton() {
     const dispatch = useAppDispatch();
-    const [newLabel, setNewLabel] = useState<string>('');
+    const [newLabel, setNewLabel] = useState('')
 
-    const handleAddLabel = () => {
-        if (newLabel.trim() !== '') {
-            dispatch(addLabel(newLabel));
-            setNewLabel('');
-        }
+    const handleFormSubmit = (e: any) => {
+        const formData = new FormData();
+        formData.append('label', newLabel);
+        dispatch(postLabel(formData));
+        setNewLabel('')
+        e.preventDefault();
     };
 
     return (
         <div>
-            <input
-                type="text"
-                value={newLabel}
-                onChange={(e) => setNewLabel(e.target.value)}
-            />
-            <Button onClick={handleAddLabel}>Add Label</Button>
+            <form onSubmit={handleFormSubmit}>
+                <input
+                    type="text"
+                    name="label"
+                    value={newLabel || ''}
+                    onChange={(e) => {
+                        setNewLabel(e.target.value);
+                    }}
+                    placeholder="New Label"
+                />
+                <Button type="submit">Add Label</Button>
+            </form>
         </div>
     );
 };

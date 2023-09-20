@@ -14,12 +14,12 @@ def cli(ctx):
 @click.pass_obj
 def pl(app):
     labels = app.labels
-    print("Labels: labels")
+    print(f"Labels: {labels}")
     return labels
 
 
 @cli.command(name="al")  # add label
-@click.option("--label", required=True, type=str)
+@click.argument("label", type=str)
 @click.pass_obj
 def add_label(app, label):
     labels = app.labels
@@ -45,8 +45,8 @@ def get_albums(app):
 
 
 @cli.command(name="am")  # add mapping
-@click.option("--label", required=True, type=str)
-@click.option("--id", required=True, type=str)
+@click.argument("label", type=str)
+@click.argument("id", type=str)
 @click.pass_obj
 def add_mapping(app, label, id):
     app.add_mapping(label, id)
