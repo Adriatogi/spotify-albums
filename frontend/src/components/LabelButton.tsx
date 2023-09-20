@@ -7,7 +7,7 @@ function LabelButton() {
     const dispatch = useAppDispatch();
     const [newLabel, setNewLabel] = useState('')
 
-    const handleFormSubmit = (e: any) => {
+    const handeLabelSubmit = (e: any) => {
         const formData = new FormData();
         formData.append('label', newLabel);
         dispatch(postLabel(formData));
@@ -17,18 +17,16 @@ function LabelButton() {
 
     return (
         <div>
-            <form onSubmit={handleFormSubmit}>
-                <input
-                    type="text"
-                    name="label"
-                    value={newLabel || ''}
-                    onChange={(e) => {
-                        setNewLabel(e.target.value);
-                    }}
-                    placeholder="New Label"
-                />
-                <Button type="submit">Add Label</Button>
-            </form>
+            <input
+                type="text"
+                name="label"
+                value={newLabel || ''}
+                onChange={(e) => {
+                    setNewLabel(e.target.value);
+                }}
+                placeholder="New Label"
+            />
+            <Button onClick={handeLabelSubmit}>Add Label</Button>
         </div>
     );
 };
