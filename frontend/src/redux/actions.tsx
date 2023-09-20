@@ -29,9 +29,7 @@ export const fetchData = () => {
                 dispatch(fetchDataSuccess(data.labels));
             })
             .catch((error) => {
-                // Handle errors here
-                console.log(error)
-                dispatch(fetchDataFailure(error));
+                console.log('error: ', error)
             });
     }
 }
