@@ -1,5 +1,6 @@
 import click
 from app import App
+from spotify import Spot
 import os
 
 
@@ -29,22 +30,31 @@ def add_label(label):
     app.save()
 
 
-@cli.command(name="ga")  # get albums
+@cli.command(name="gua")  # get user albums
 @click.option("--level", default=0, type=int)
 def get_albums(level):
-    app = App()
+    sp = Spot()
 
-    albums = app.get_albums(level)
+    albums = sp.get_user_albums(level=level)
     print(albums)
     return albums
 
 
-@cli.command(name="gaa")  # get all albums
-def get_albums():
-    app = App()
+@cli.command(name="gaua")  # get all user albums
+def get_all_albums():
+    sp = Spot()
 
-    albums = app.get_all_albums()
+    albums = sp.get_all_user_albums()
     print(len(albums))
+    return albums
+
+
+@cli.command(name="gal")  # get albums from label
+@click.argument("label", type=str)
+def get_albums_ids(label):
+    app = App()
+    print(label)
+    albums = app.get_albums_label(label)
     return albums
 
 
@@ -62,10 +72,10 @@ def add_mapping(label, id):
 @cli.command(name="test")
 def test():
     click.echo("Testing command")
-    app = App()
+    sp = Spot()
 
-    albums = app.get_albums(0)
-    print(albums["items"][0]["album"]["name"])
+    albums = sp.get_user_albums(0)
+    print(albums["items"][1]["album"]["id"])
 
 
 @cli.command(name="d")  # delete save

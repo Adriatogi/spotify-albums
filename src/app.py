@@ -2,7 +2,7 @@ import click
 import json
 import os
 
-from spotify import spot
+from spotify import Spot
 
 
 class App:
@@ -12,7 +12,7 @@ class App:
         self._label_map = {}
         self._labels = []
         self._albums = []
-        self._sp = spot()
+        self._sp = Spot()
 
         self.load()
 
@@ -42,28 +42,30 @@ class App:
     def local_save(self, local_save):
         self._local_save_path = local_save
 
-    # @property # Idk if i want to have the capability to override all data.
-    # def data(self):
-    #     return self._data
-
-    # # a setter function
-    # @local_save.setter
-    # def data(self, data):
-    #     self._data = data
-    #     self.save()
-
     @property
     def sp(self):
         return self._sp
 
-    def get_albums(self, level):
-        return self._sp.get_user_albums(level)
-
-    def get_all_albums(self):
-        return self._sp.get_user_all_albums()
-
     def get_user(self):
         return self._sp.get_user()
+
+    def get_albums_label(self, label):
+        if label in self._label_map:
+            ids = self._label_map[label]
+            if ids:
+                albums = self._sp.get_albums_ids(ids)
+                if albums is not None:
+                    neededInfo = [
+                        {
+                            "id": album["id"],
+                            "img_url": album["images"][0]["url"],
+                            "name": album["name"],
+                        }
+                        for album in albums["albums"]
+                    ]
+                    print(neededInfo)
+                    return neededInfo
+        return []
 
     def save(self, path=""):
         path = self._local_save_path if (not path) else path

@@ -2,6 +2,7 @@ export const ADD_LABEL = 'ADD_TO_LIST';
 export const FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS';
 export const FETCH_DATA_FAILURE = 'FETCH_DATA_FAILURE';
 export const SELECT_LABEL = 'SELECT_LABEL';
+export const SET_ALBUMS = 'SET_ALBUMS'
 
 export const addLabel = (item: string) => ({
     type: ADD_LABEL,
@@ -17,6 +18,11 @@ const fetchDataSuccess = (data: any) => ({
     type: FETCH_DATA_SUCCESS,
     payload: data,
 });
+
+const getAlbumsSuccess = (data: any) => ({
+    type: SET_ALBUMS,
+    payload: data
+})
 
 export const fetchData = () => {
     return async (dispatch: any) => {
@@ -76,4 +82,23 @@ export const postMap = (formData: any) => {
     }
 }
 
+export const getAlbums = (label: any) => {
+    return async (dispatch: any) => {
+        try {
+            const response = await fetch("/albums/" + label, {
+                method: 'GET',
+            })
 
+            if (!response.ok) {
+                throw new Error(`Request failed with status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log("albums", data.albums)
+            dispatch(getAlbumsSuccess(data.albums))
+
+        } catch (error) {
+            console.log('error: ', error)
+        }
+    }
+}

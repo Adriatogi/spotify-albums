@@ -6,7 +6,7 @@ spot_secret = os.environ["SPOT_SECRET"]
 spot_id = os.environ["SPOT_ID"]
 
 
-class spot:
+class Spot:
     def __init__(self):
         self._sp = spotipy.Spotify(
             auth_manager=SpotifyOAuth(
@@ -24,10 +24,15 @@ class spot:
     def get_user(self):
         return self._sp.current_user()
 
-    def get_user_all_albums(self):
+    def get_all_user_albums(self):
         results = self._sp.current_user_saved_albums(limit=50)
         albums = results["items"]
         while results["next"]:
             results = self._sp.next(results)
             albums.extend(results["items"])
+        return albums
+
+    def get_albums_ids(self, ids):
+        print("Ids: ", ids)
+        albums = self._sp.albums(ids)
         return albums

@@ -44,3 +44,7 @@
   display: grid;
   justify-content: center;
 }
+
+.label {
+  margin-top: 5px;
+}

@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 # on the terminal type: curl http://127.0.0.1:5000/
 @app.route("/labels", methods=["GET", "POST"])
-def label():
+def labels():
     if request.method == "GET":
         labels = cli(["gl"], standalone_mode=False)
         return jsonify({"labels": labels})
@@ -15,6 +15,15 @@ def label():
         label = request.form["label"]
         cli(["al", label], standalone_mode=False)
         return
+
+
+@app.route("/albums/<string:label>", methods=["GET", "POST"])
+def albums(label):
+    if request.method == "GET":
+        print(label)
+        albums = cli(["gal", label], standalone_mode=False)
+        print("albums:", albums)
+        return jsonify({"albums": albums})
 
 
 @app.route("/maps", methods=["GET", "POST"])
