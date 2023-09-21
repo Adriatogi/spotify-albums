@@ -17,7 +17,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Spotify Album Catalog</h1>
+      <h1 className='header'>Spotify Album Catalog</h1>
       <div className='dashboard'>
         <div className='albumsComponent'>
           <AlbumsComponent />

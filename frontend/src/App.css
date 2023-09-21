@@ -1,9 +1,14 @@
 .App {
   text-align: center;
+  font-family: Verdana, sans-serif;
 }
 
 .dashboard {
   display: flex;
+}
+
+.header {
+  margin-bottom: 30px;
 }
 
 .albumsComponent {
