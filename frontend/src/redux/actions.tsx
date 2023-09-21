@@ -51,4 +51,23 @@ export const postLabel = (formData: any) => {
     }
 }
 
+export const postMap = (formData: any) => {
+    return async (dispatch: any) => {
+        try {
+            const response = await fetch("/maps", {
+                method: 'POST',
+                body: formData
+            })
+
+            if (!response.ok) {
+                throw new Error(`Request failed with status: ${response.status}`);
+            }
+
+        } catch (error) {
+            console.log('error: ', error)
+        }
+        dispatch(fetchData())
+    }
+}
+
 

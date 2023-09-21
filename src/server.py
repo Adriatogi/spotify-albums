@@ -17,6 +17,18 @@ def label():
         return
 
 
+@app.route("/maps", methods=["GET", "POST"])
+def maps():
+    if request.method == "GET":
+        maps = cli(["gm"], standalone_mode=False)
+        return jsonify({"maps": maps})
+    elif request.method == "POST":
+        label = request.form["label"]
+        id = request.form["id"]
+        cli(["am", label, id], standalone_mode=False)
+        return
+
+
 @app.route("/ping", methods=["GET"])
 def ping():
     if request.method == "GET":
