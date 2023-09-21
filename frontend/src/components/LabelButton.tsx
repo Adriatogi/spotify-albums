@@ -17,16 +17,18 @@ function LabelButton() {
 
     return (
         <div>
-            <input
-                type="text"
-                name="label"
-                value={newLabel || ''}
-                onChange={(e) => {
-                    setNewLabel(e.target.value);
-                }}
-                placeholder="New Label"
-            />
-            <Button onClick={handeLabelSubmit}>Add Label</Button>
+            <form onSubmit={handeLabelSubmit}>
+                <input
+                    type="text"
+                    name="label"
+                    value={newLabel || ''}
+                    onChange={(e) => {
+                        setNewLabel(e.target.value);
+                    }}
+                    placeholder="New Label"
+                />
+                <Button type="submit">Add Label</Button>
+            </form>
         </div>
     );
 };
