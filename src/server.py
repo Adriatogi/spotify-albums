@@ -6,8 +6,6 @@ app = Flask(__name__)
 
 
 # on the terminal type: curl http://127.0.0.1:5000/
-# returns hello world when we use GET.
-# returns the data that we send when we use POST.
 @app.route("/labels", methods=["GET", "POST"])
 def label():
     if request.method == "GET":
@@ -25,6 +23,5 @@ def ping():
         return jsonify({"message": "Ping successfull"})
 
 
-# driver function
 if __name__ == "__main__":
     app.run(debug=True)

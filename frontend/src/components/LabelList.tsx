@@ -1,8 +1,8 @@
 import React from 'react';
-import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { useAppSelector } from '../redux/hooks';
 import Card from "react-bootstrap/Card"
 
-function LabelsComponent() {
+function LabelList() {
     const labels = useAppSelector((state) => state.app.labels);
 
     return (
@@ -19,4 +19,4 @@ function LabelsComponent() {
     );
 }
 
-export default LabelsComponent
+export default LabelList
