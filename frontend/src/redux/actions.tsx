@@ -1,11 +1,17 @@
 export const ADD_LABEL = 'ADD_TO_LIST';
 export const FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS';
 export const FETCH_DATA_FAILURE = 'FETCH_DATA_FAILURE';
+export const SELECT_LABEL = 'SELECT_LABEL';
 
 export const addLabel = (item: string) => ({
     type: ADD_LABEL,
     payload: item,
 });
+
+export const selectLabel = (item: string) => ({
+    type: SELECT_LABEL,
+    payload: item
+})
 
 const fetchDataSuccess = (data: any) => ({
     type: FETCH_DATA_SUCCESS,

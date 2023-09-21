@@ -1,19 +1,25 @@
 import React from 'react';
-import { useAppSelector } from '../redux/hooks';
-import Card from "react-bootstrap/Card"
+import { useAppSelector, useAppDispatch } from '../redux/hooks';
+import Button from "react-bootstrap/Button"
+import { selectLabel } from '../redux/actions';
 
 function LabelList() {
     const labels = useAppSelector((state) => state.app.labels);
+    const selected = useAppSelector((state) => state.app.selectedLabel);
+    const dispatch = useAppDispatch();
+
+    const handleLabelSelect = (e: string) => {
+        dispatch(selectLabel(e))
+    }
 
     return (
         <div className="labels">
 
             {labels.map((label, index) =>
-                <React.Fragment key={index}>
-                    <Card className="text-center" style={{ width: '5rem', margin: '3px' }}>
-                        <Card.Text>{label}</Card.Text>
-                    </Card>
-                </React.Fragment>
+                <Button variant={selected === label ? 'light' : 'outline-light'} key={index}
+                    onClick={() => handleLabelSelect(label)}>
+                    {label}
+                </Button>
             )}
         </div>
     );

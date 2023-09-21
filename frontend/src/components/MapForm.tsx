@@ -8,7 +8,7 @@ function MapForm() {
     const [label, setLabel] = useState('')
     const [id, setId] = useState('')
 
-    const handeLabelSubmit = (e: any) => {
+    const handleLabelSubmit = (e: any) => {
         const formData = new FormData();
         formData.append('label', label);
         formData.append('id', id);
@@ -20,7 +20,7 @@ function MapForm() {
 
     return (
         <div>
-            <form onSubmit={handeLabelSubmit}>
+            <form onSubmit={handleLabelSubmit}>
                 <input
                     type="text"
                     name="label"
