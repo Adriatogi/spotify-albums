@@ -7,38 +7,42 @@ import os
 @click.pass_context
 def cli(ctx):
     print("Running cli")
-    ctx.obj = App()
 
 
 @cli.command(name="gl")  # get labels
-@click.pass_obj
-def pl(app):
+def pl():
+    app = App()
     labels = app.labels
     print(f"Labels: {labels}")
-    return labels
+
+    return list(labels)
 
 
 @cli.command(name="al")  # add label
 @click.argument("label", type=str)
-@click.pass_obj
-def add_label(app, label):
+def add_label(label):
+    app = App()
+
     labels = app.labels
-    labels.append(label)
+    if label not in labels:
+        labels.append(label)
     app.save()
 
 
 @cli.command(name="ga")  # get albums
 @click.option("--level", default=0, type=int)
-@click.pass_obj
-def get_albums(app, level):
+def get_albums(level):
+    app = App()
+
     albums = app.get_albums(level)
     print(albums)
     return albums
 
 
 @cli.command(name="gaa")  # get all albums
-@click.pass_obj
-def get_albums(app):
+def get_albums():
+    app = App()
+
     albums = app.get_all_albums()
     print(len(albums))
     return albums
@@ -47,17 +51,19 @@ def get_albums(app):
 @cli.command(name="am")  # add mapping
 @click.argument("label", type=str)
 @click.argument("id", type=str)
-@click.pass_obj
-def add_mapping(app, label, id):
+def add_mapping(label, id):
+    app = App()
+
     app.add_mapping(label, id)
     app.save()
     return
 
 
 @cli.command(name="test")
-@click.pass_obj
-def test(app):
+def test():
     click.echo("Testing command")
+    app = App()
+
     albums = app.get_albums(0)
     print(albums["items"][0]["album"]["name"])
 
