@@ -164,4 +164,9 @@ cython_debug/
 
 # React
 */node_modules
+
+#yarn
 frontend/yarn.lock
+
+#app
+src/local_save.json

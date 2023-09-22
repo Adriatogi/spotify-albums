@@ -110,6 +110,7 @@ export const fetchLabelAlbums = (label: any) => {
 export const fetchUserAlbums = (level: any) => {
     return async (dispatch: any) => {
         try {
+            console.log("fetch user", level)
             const response = await fetch("/albums/user/" + level, {
                 method: 'GET',
             })
