@@ -72,6 +72,35 @@
   margin-right: 10px;
   margin-left: 10px;
   margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.userAlbum {
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  position: relative;
+}
+
+.userAlbumCard {
+  z-index: 0;
+  position: relative;
+}
+
+.userAlbumOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  background-color: rgba(0, 255, 0, 0.5);
+  z-index: 1;
+  display: none;
+}
+
+.userAlbum:hover .userAlbumOverlay {
+  display: block;
 }
 
 .deleteLabel {

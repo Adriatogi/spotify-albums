@@ -49,8 +49,7 @@ def maps():
     elif request.method == "POST":
         label = request.form["label"]
         id = request.form["id"]
-        cli(["am", label, id], standalone_mode=False)
-        return
+        cli(["am", label, id])
 
 
 @app.route("/ping", methods=["GET"])

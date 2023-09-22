@@ -84,7 +84,6 @@ def add_mapping(label, id):
 
     app.add_mapping(label, id)
     app.save()
-    return
 
 
 @cli.command(name="test")

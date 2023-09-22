@@ -145,6 +145,6 @@ export const postMap = (formData: any) => {
             console.log('error: ', error)
         }
 
-        dispatch(fetchLabelAlbums(formData['label']))
+        dispatch(fetchLabelAlbums(formData.get('label')))
     }
 }
