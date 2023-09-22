@@ -48,3 +48,14 @@
 .label {
   margin-top: 5px;
 }
+
+.albumList {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.album {
+  margin-right: 10px;
+  margin-left: 10px;
+}

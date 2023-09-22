@@ -3,19 +3,21 @@ import { ADD_LABEL, FETCH_DATA_SUCCESS, SELECT_LABEL, SET_ALBUMS } from "./actio
 interface albumInfo {
     name: string;
     id: string;
-    img: string;
+    img_url: string;
 }
 
 interface AppState {
     labels: string[]; // Assuming your state includes a list
     selectedLabel: string;
     labelAlbums: albumInfo[];
+    userAlbums: albumInfo[];
 }
 
 const initialState: AppState = {
     labels: [],
     selectedLabel: '',
-    labelAlbums: []
+    labelAlbums: [],
+    userAlbums: []
 };
 
 const appReducer = (state = initialState, action: any): AppState => {

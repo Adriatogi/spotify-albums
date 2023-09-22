@@ -87,7 +87,6 @@ class App:
                 self._data = json.load(json_file)
 
             # Assume it holds info (Probably make a try except that exits the program)
-            # self._label_map = self._data["label_map"]
             self._labels = self._data["labels"]
             self._label_map = self._data["map"]
 

@@ -14,7 +14,7 @@ export const selectLabel = (item: string) => ({
     payload: item
 })
 
-const fetchDataSuccess = (data: any) => ({
+const fetchLabelsSuccess = (data: any) => ({
     type: FETCH_DATA_SUCCESS,
     payload: data,
 });
@@ -24,7 +24,7 @@ const getAlbumsSuccess = (data: any) => ({
     payload: data
 })
 
-export const fetchData = () => {
+export const fetchLabels = () => {
     return async (dispatch: any) => {
         try {
             const response = await fetch("/labels", {
@@ -36,8 +36,7 @@ export const fetchData = () => {
             }
 
             const data = await response.json();
-            console.log(data)
-            dispatch(fetchDataSuccess(data.labels));
+            dispatch(fetchLabelsSuccess(data.labels));
         } catch (error) {
             console.log('error: ', error)
         }
@@ -59,26 +58,7 @@ export const postLabel = (formData: any) => {
         } catch (error) {
             console.log('error: ', error)
         }
-        dispatch(fetchData())
-    }
-}
-
-export const postMap = (formData: any) => {
-    return async (dispatch: any) => {
-        try {
-            const response = await fetch("/maps", {
-                method: 'POST',
-                body: formData
-            })
-
-            if (!response.ok) {
-                throw new Error(`Request failed with status: ${response.status}`);
-            }
-
-        } catch (error) {
-            console.log('error: ', error)
-        }
-        dispatch(fetchData())
+        dispatch(fetchLabels())
     }
 }
 
@@ -100,5 +80,25 @@ export const getAlbums = (label: any) => {
         } catch (error) {
             console.log('error: ', error)
         }
+    }
+}
+
+export const postMap = (formData: any) => {
+    return async (dispatch: any) => {
+        try {
+            const response = await fetch("/maps", {
+                method: 'POST',
+                body: formData
+            })
+
+            if (!response.ok) {
+                throw new Error(`Request failed with status: ${response.status}`);
+            }
+
+        } catch (error) {
+            console.log('error: ', error)
+        }
+
+        dispatch(getAlbums(formData['label']))
     }
 }

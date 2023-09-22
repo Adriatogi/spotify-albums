@@ -2,17 +2,18 @@ import React, { useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import LabelsComponent from './components/LabelsComponent';
 import AlbumsComponent from './components/AlbumsComponent';
-import './App.css';
+import UserComponent from './components/UserComponent';
+import './styles.css';
 import { useAppDispatch } from './redux/hooks';
-import { fetchData } from './redux/actions';
+import { fetchLabels } from './redux/actions';
 
 
 function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    // Dispatch the fetchData action when the app loads
-    dispatch(fetchData());
+    // Dispatch actions when the app loads
+    dispatch(fetchLabels());
   }, [dispatch]);
 
   return (
@@ -26,6 +27,9 @@ function App() {
         <div className='labelsComponent'>
           <LabelsComponent />
         </div>
+      </div>
+      <div>
+        <UserComponent />
       </div>
     </div >
   );
