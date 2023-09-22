@@ -60,9 +60,18 @@
   margin-top: 20px;
 }
 
+.userAlbumList {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  height: 1000px;
+  overflow-y: auto;
+}
+
 .album {
   margin-right: 10px;
   margin-left: 10px;
+  margin-bottom: 10px;
 }
 
 .deleteLabel {

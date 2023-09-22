@@ -16,7 +16,7 @@ function UserComponent() {
     return (
         <div>
             <h3 className="albumsHeader">User Albums</h3>
-            <div className="albumList">
+            <div className="userAlbumList">
                 {userAlbums.map((album, index) =>
                     <div className="album" key={index}>
                         <Card style={{ width: '10rem' }}>
