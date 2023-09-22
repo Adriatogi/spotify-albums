@@ -34,6 +34,10 @@ class App:
         else:
             self._label_map[label] = [id]
 
+    def delete_mapping(self, label, id):
+        if label in self._labels and id in self._label_map[label]:
+            self._label_map[label].remove(id)
+
     @property
     def local_save(self):
         return self._local_save_path

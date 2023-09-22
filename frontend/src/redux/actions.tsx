@@ -148,3 +148,23 @@ export const postMap = (formData: any) => {
         dispatch(fetchLabelAlbums(formData.get('label')))
     }
 }
+
+export const deleteMap = (formData: any) => {
+    return async (dispatch: any) => {
+        try {
+            const response = await fetch("/maps", {
+                method: 'DELETE',
+                body: formData
+            })
+
+            if (!response.ok) {
+                throw new Error(`Request failed with status: ${response.status}`);
+            }
+
+        } catch (error) {
+            console.log('error: ', error)
+        }
+
+        dispatch(fetchLabelAlbums(formData.get('label')))
+    }
+}

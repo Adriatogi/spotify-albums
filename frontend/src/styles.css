@@ -99,6 +99,22 @@
   display: none;
 }
 
+.labelAlbumOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  background-color: rgba(255, 0, 0, 0.7);
+  z-index: 1;
+  display: none;
+  color: white;
+}
+
+.userAlbum:hover .labelAlbumOverlay {
+  display: block;
+}
+
 .userAlbum:hover .userAlbumOverlay {
   display: block;
 }
