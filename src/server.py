@@ -14,7 +14,13 @@ def labels():
     elif request.method == "POST":
         label = request.form["label"]
         cli(["al", label], standalone_mode=False)
-        return
+        return jsonify({"message": f"Succesfully posted label: {label}"}), 200
+
+
+@app.route("/labels/<string:label>", methods=["DELETE"])
+def delete_label(label):
+    if request.method == "DELETE":
+        cli(["dl", label])
 
 
 @app.route("/albums/<string:label>", methods=["GET", "POST"])

@@ -30,6 +30,17 @@ def add_label(label):
     app.save()
 
 
+@cli.command(name="dl")  # delete label
+@click.argument("label", type=str)
+def delete_label(label):
+    app = App()
+
+    labels = app.labels
+    if label in labels:
+        labels.remove(label)
+    app.save()
+
+
 @cli.command(name="gua")  # get user albums
 @click.option("--level", default=0, type=int)
 def get_albums(level):

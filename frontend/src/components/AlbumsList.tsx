@@ -7,7 +7,7 @@ function AlbumsList() {
         <div className="albumList">
             {albumsLabel.map((album, index) =>
                 <div className="album" key={index}>
-                    <Card style={{ width: '15rem' }}>
+                    <Card style={{ width: '14rem' }}>
                         <Card.Img
                             variant="top"
                             src={album.img_url}

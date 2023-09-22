@@ -1,4 +1,7 @@
-import { ADD_LABEL, FETCH_LABEL_SUCCESS, SELECT_LABEL, SET_LABEL_ALBUMS, ADD_USER_ALBUMS } from "./actions";
+import {
+    ADD_LABEL, FETCH_LABEL_SUCCESS, SELECT_LABEL,
+    SET_LABEL_ALBUMS, ADD_USER_ALBUMS
+} from "./actions";
 
 interface albumInfo {
     name: string;

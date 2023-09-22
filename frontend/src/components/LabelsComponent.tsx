@@ -1,6 +1,7 @@
 import LabelButton from "./LabelButton"
 import LabelList from "./LabelList";
 import { useAppSelector } from "../redux/hooks";
+import DeleteLabelButton from "./DeleteLabel";
 
 function LabelsComponent() {
     const labels = useAppSelector((state) => state.app.labels);
@@ -15,6 +16,7 @@ function LabelsComponent() {
                     </div>
                 ) : (<p>No labels.</p>)
             }
+            <DeleteLabelButton />
         </div>
     )
 }

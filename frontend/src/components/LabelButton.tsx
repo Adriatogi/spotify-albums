@@ -8,10 +8,12 @@ function LabelButton() {
     const [newLabel, setNewLabel] = useState('')
 
     const handleLabelSubmit = (e: any) => {
-        const formData = new FormData();
-        formData.append('label', newLabel);
-        dispatch(postLabel(formData));
-        setNewLabel('')
+        if (newLabel !== '') {
+            const formData = new FormData();
+            formData.append('label', newLabel);
+            dispatch(postLabel(formData));
+            setNewLabel('')
+        }
         e.preventDefault();
     };
 

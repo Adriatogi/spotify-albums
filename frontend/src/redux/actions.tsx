@@ -1,8 +1,8 @@
-export const ADD_LABEL = 'ADD_TO_LIST';
 export const FETCH_LABEL_SUCCESS = 'FETCH_DATA_SUCCESS';
-export const SELECT_LABEL = 'SELECT_LABEL';
 export const SET_LABEL_ALBUMS = 'SET_LABEL_ALBUMS'
 export const ADD_USER_ALBUMS = 'ADD_USER_ALBUMS'
+export const SELECT_LABEL = 'SELECT_LABEL';
+export const ADD_LABEL = 'ADD_TO_LIST';
 
 export const addLabel = (item: string) => ({
     type: ADD_LABEL,
@@ -64,6 +64,25 @@ export const postLabel = (formData: any) => {
             console.log('error: ', error)
         }
         dispatch(fetchLabels())
+    }
+}
+
+export const deleteLabel = (label: any) => {
+    return async (dispatch: any) => {
+        try {
+            const response = await fetch("/labels/" + label, {
+                method: 'DELETE',
+            })
+
+            if (!response.ok) {
+                throw new Error(`Request failed with status: ${response.status}`);
+            }
+
+        } catch (error) {
+            console.log('error: ', error)
+        }
+        dispatch(fetchLabels())
+        dispatch(selectLabel(''))
     }
 }
 
