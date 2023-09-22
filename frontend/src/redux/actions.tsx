@@ -19,7 +19,7 @@ const fetchLabelsSuccess = (data: any) => ({
     payload: data,
 });
 
-const getAlbumsSuccess = (data: any) => ({
+const getLabelAlbumsSuccess = (data: any) => ({
     type: SET_ALBUMS,
     payload: data
 })
@@ -62,7 +62,7 @@ export const postLabel = (formData: any) => {
     }
 }
 
-export const getAlbums = (label: any) => {
+export const getLabelAlbums = (label: any) => {
     return async (dispatch: any) => {
         try {
             const response = await fetch("/albums/" + label, {
@@ -75,7 +75,7 @@ export const getAlbums = (label: any) => {
 
             const data = await response.json();
             console.log("albums", data.albums)
-            dispatch(getAlbumsSuccess(data.albums))
+            dispatch(getLabelAlbumsSuccess(data.albums))
 
         } catch (error) {
             console.log('error: ', error)
@@ -99,6 +99,6 @@ export const postMap = (formData: any) => {
             console.log('error: ', error)
         }
 
-        dispatch(getAlbums(formData['label']))
+        dispatch(getLabelAlbums(formData['label']))
     }
 }

@@ -12,6 +12,11 @@
   margin-bottom: 30px;
 }
 
+.albumsHeader {
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
 .albumsComponent {
   flex: 80%;
   background-color: #e0e0e073;

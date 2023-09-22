@@ -6,7 +6,7 @@ function AlbumsComponent() {
     const selectedLabel = useAppSelector((state) => state.app.selectedLabel);
     return (
         <div>
-            <h3>{selectedLabel} Albums</h3>
+            <h3 className="albumsHeader">{selectedLabel} Albums</h3>
             <MapForm />
             <AlbumsList />
         </div>
