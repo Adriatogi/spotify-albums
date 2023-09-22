@@ -14,7 +14,7 @@ function LabelsComponent() {
                     <div className="labelList">
                         <LabelList />
                     </div>
-                ) : (<p>No labels.</p>)
+                ) : (<p style={{ color: 'white' }}>No labels</p>)
             }
             <DeleteLabelButton />
         </div>
