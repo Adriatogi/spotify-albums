@@ -86,7 +86,7 @@ def add_mapping(label, id):
     app.save()
 
 
-@cli.command(name="dm")  # add mapping
+@cli.command(name="dm")  # delete mapping
 @click.argument("label", type=str)
 @click.argument("id", type=str)
 def add_mapping(label, id):

@@ -41,7 +41,7 @@ def user_albums(level):
         return jsonify({"albums": albums})
 
 
-@app.route("/maps", methods=["GET", "POST", "DELETE"])
+@app.route("/maps", methods=["POST", "DELETE"])
 def maps():
     if request.method == "GET":
         maps = cli(["gm"], standalone_mode=False)
