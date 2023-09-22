@@ -1,16 +1,18 @@
 import React from 'react';
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import Button from "react-bootstrap/Button"
-import { getLabelAlbums, selectLabel } from '../redux/actions';
+import { fetchLabelAlbums, selectLabel } from '../redux/actions';
 
 function LabelList() {
     const labels = useAppSelector((state) => state.app.labels);
     const selected = useAppSelector((state) => state.app.selectedLabel);
     const dispatch = useAppDispatch();
 
+    console.log("labels ", labels)
+
     const handleLabelSelect = (e: string) => {
         dispatch(selectLabel(e))
-        dispatch(getLabelAlbums(e))
+        dispatch(fetchLabelAlbums(e))
     }
 
     return (

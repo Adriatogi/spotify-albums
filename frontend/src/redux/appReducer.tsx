@@ -1,4 +1,4 @@
-import { ADD_LABEL, FETCH_DATA_SUCCESS, SELECT_LABEL, SET_ALBUMS } from "./actions";
+import { ADD_LABEL, FETCH_LABEL_SUCCESS, SELECT_LABEL, SET_LABEL_ALBUMS, ADD_USER_ALBUMS } from "./actions";
 
 interface albumInfo {
     name: string;
@@ -7,7 +7,7 @@ interface albumInfo {
 }
 
 interface AppState {
-    labels: string[]; // Assuming your state includes a list
+    labels: string[];
     selectedLabel: string;
     labelAlbums: albumInfo[];
     userAlbums: albumInfo[];
@@ -22,7 +22,7 @@ const initialState: AppState = {
 
 const appReducer = (state = initialState, action: any): AppState => {
     switch (action.type) {
-        case FETCH_DATA_SUCCESS:
+        case FETCH_LABEL_SUCCESS:
             return {
                 ...state,
                 labels: action.payload,
@@ -37,10 +37,15 @@ const appReducer = (state = initialState, action: any): AppState => {
                 ...state,
                 selectedLabel: action.payload
             }
-        case SET_ALBUMS:
+        case SET_LABEL_ALBUMS:
             return {
                 ...state,
                 labelAlbums: action.payload
+            }
+        case ADD_USER_ALBUMS:
+            return {
+                ...state,
+                userAlbums: [...state.userAlbums, ...action.payload],
             }
         default:
             return state;

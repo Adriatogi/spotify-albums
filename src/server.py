@@ -18,11 +18,20 @@ def labels():
 
 
 @app.route("/albums/<string:label>", methods=["GET", "POST"])
-def albums(label):
+def label_albums(label):
     if request.method == "GET":
         print(label)
         albums = cli(["gal", label], standalone_mode=False)
         print("albums:", albums)
+        return jsonify({"albums": albums})
+
+
+@app.route("/albums/user/<string:level>", methods=["GET", "POST"])
+def user_albums(level):
+    if request.method == "GET":
+        print(level)
+        albums = cli(["gua", level], standalone_mode=False)
+        print("albums:", len(albums))
         return jsonify({"albums": albums})
 
 

@@ -5,7 +5,7 @@ import AlbumsComponent from './components/AlbumsComponent';
 import UserComponent from './components/UserComponent';
 import './styles.css';
 import { useAppDispatch } from './redux/hooks';
-import { fetchLabels } from './redux/actions';
+import { fetchLabels, fetchUserAlbums } from './redux/actions';
 
 
 function App() {
@@ -14,6 +14,7 @@ function App() {
   useEffect(() => {
     // Dispatch actions when the app loads
     dispatch(fetchLabels());
+    dispatch(fetchUserAlbums('0'));
   }, [dispatch]);
 
   return (

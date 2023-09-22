@@ -1,8 +1,8 @@
 export const ADD_LABEL = 'ADD_TO_LIST';
-export const FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS';
-export const FETCH_DATA_FAILURE = 'FETCH_DATA_FAILURE';
+export const FETCH_LABEL_SUCCESS = 'FETCH_DATA_SUCCESS';
 export const SELECT_LABEL = 'SELECT_LABEL';
-export const SET_ALBUMS = 'SET_ALBUMS'
+export const SET_LABEL_ALBUMS = 'SET_LABEL_ALBUMS'
+export const ADD_USER_ALBUMS = 'ADD_USER_ALBUMS'
 
 export const addLabel = (item: string) => ({
     type: ADD_LABEL,
@@ -15,12 +15,17 @@ export const selectLabel = (item: string) => ({
 })
 
 const fetchLabelsSuccess = (data: any) => ({
-    type: FETCH_DATA_SUCCESS,
+    type: FETCH_LABEL_SUCCESS,
     payload: data,
 });
 
-const getLabelAlbumsSuccess = (data: any) => ({
-    type: SET_ALBUMS,
+const fetchLabelAlbumsSuccess = (data: any) => ({
+    type: SET_LABEL_ALBUMS,
+    payload: data
+})
+
+const fetchUserAlbumsSuccess = (data: any) => ({
+    type: ADD_USER_ALBUMS,
     payload: data
 })
 
@@ -62,7 +67,7 @@ export const postLabel = (formData: any) => {
     }
 }
 
-export const getLabelAlbums = (label: any) => {
+export const fetchLabelAlbums = (label: any) => {
     return async (dispatch: any) => {
         try {
             const response = await fetch("/albums/" + label, {
@@ -75,7 +80,28 @@ export const getLabelAlbums = (label: any) => {
 
             const data = await response.json();
             console.log("albums", data.albums)
-            dispatch(getLabelAlbumsSuccess(data.albums))
+            dispatch(fetchLabelAlbumsSuccess(data.albums))
+
+        } catch (error) {
+            console.log('error: ', error)
+        }
+    }
+}
+
+export const fetchUserAlbums = (level: any) => {
+    return async (dispatch: any) => {
+        try {
+            const response = await fetch("/albums/user/" + level, {
+                method: 'GET',
+            })
+
+            if (!response.ok) {
+                throw new Error(`Request failed with status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log("user albums", data.albums)
+            dispatch(fetchUserAlbumsSuccess(data.albums))
 
         } catch (error) {
             console.log('error: ', error)
@@ -99,6 +125,6 @@ export const postMap = (formData: any) => {
             console.log('error: ', error)
         }
 
-        dispatch(getLabelAlbums(formData['label']))
+        dispatch(fetchLabelAlbums(formData['label']))
     }
 }

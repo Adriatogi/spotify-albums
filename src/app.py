@@ -67,6 +67,21 @@ class App:
                     return neededInfo
         return []
 
+    def get_user_albums(self, level):
+        albums = self._sp.get_user_albums(level)
+        if albums is not None:
+            neededInfo = [
+                {
+                    "id": item["album"]["id"],
+                    "img_url": item["album"]["images"][0]["url"],
+                    "name": item["album"]["name"],
+                }
+                for item in albums["items"]
+            ]
+            print(len(neededInfo))
+            return neededInfo
+        return []
+
     def save(self, path=""):
         path = self._local_save_path if (not path) else path
 

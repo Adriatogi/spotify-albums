@@ -51,10 +51,17 @@ def get_all_albums():
 
 @cli.command(name="gal")  # get albums from label
 @click.argument("label", type=str)
-def get_albums_ids(label):
+def get_albums_label(label):
     app = App()
-    print(label)
     albums = app.get_albums_label(label)
+    return albums
+
+
+@cli.command(name="gua")  # get albums from label
+@click.argument("level", type=int)
+def get_albums_label(level):
+    app = App()
+    albums = app.get_user_albums(level)
     return albums
 
 
