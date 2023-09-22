@@ -3,6 +3,7 @@ export const SET_LABEL_ALBUMS = 'SET_LABEL_ALBUMS'
 export const ADD_USER_ALBUMS = 'ADD_USER_ALBUMS'
 export const SELECT_LABEL = 'SELECT_LABEL';
 export const ADD_LABEL = 'ADD_TO_LIST';
+export const CLEAR_LABEL_ALBUMS = 'CLEAR_LABEL_ALBUMS'
 
 export const addLabel = (item: string) => ({
     type: ADD_LABEL,
@@ -27,6 +28,10 @@ const fetchLabelAlbumsSuccess = (data: any) => ({
 const fetchUserAlbumsSuccess = (data: any) => ({
     type: ADD_USER_ALBUMS,
     payload: data
+})
+
+const clearLabelAlbum = () => ({
+    type: CLEAR_LABEL_ALBUMS,
 })
 
 export const fetchLabels = () => {
@@ -82,6 +87,7 @@ export const deleteLabel = (label: any) => {
             console.log('error: ', error)
         }
         dispatch(fetchLabels())
+        dispatch(clearLabelAlbum())
         dispatch(selectLabel(''))
     }
 }

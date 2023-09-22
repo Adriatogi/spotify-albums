@@ -38,6 +38,11 @@ def delete_label(label):
     labels = app.labels
     if label in labels:
         labels.remove(label)
+
+    mapping = app.map
+    if label in mapping:
+        del mapping[label]
+
     app.save()
 
 

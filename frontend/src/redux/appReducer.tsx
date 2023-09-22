@@ -1,6 +1,6 @@
 import {
     ADD_LABEL, FETCH_LABEL_SUCCESS, SELECT_LABEL,
-    SET_LABEL_ALBUMS, ADD_USER_ALBUMS
+    SET_LABEL_ALBUMS, ADD_USER_ALBUMS, CLEAR_LABEL_ALBUMS
 } from "./actions";
 
 interface albumInfo {
@@ -49,6 +49,11 @@ const appReducer = (state = initialState, action: any): AppState => {
             return {
                 ...state,
                 userAlbums: [...state.userAlbums, ...action.payload],
+            }
+        case CLEAR_LABEL_ALBUMS:
+            return {
+                ...state,
+                labelAlbums: []
             }
         default:
             return state;
