@@ -29,7 +29,8 @@ class App:
             self._labels.append(label)
 
         if label in self._label_map:
-            self._label_map[label].append(id)
+            if id not in self._label_map[label]:
+                self._label_map[label].append(id)
         else:
             self._label_map[label] = [id]
 

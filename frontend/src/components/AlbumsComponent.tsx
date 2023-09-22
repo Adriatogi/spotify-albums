@@ -1,4 +1,3 @@
-import MapForm from "./MapForm"
 import AlbumsList from "./AlbumsList";
 import { useAppSelector } from "../redux/hooks";
 
@@ -7,7 +6,6 @@ function AlbumsComponent() {
     return (
         <div>
             <h3 className="albumsHeader">{selectedLabel} Albums</h3>
-            <MapForm />
             <AlbumsList />
         </div>
     )
