@@ -4,8 +4,8 @@ const app = express();
 const port = 3000;
 
 // Define a route
-app.get('/', (req: Request, res: Response) => {
-    res.send('Hello, Express in TypeScript!');
+app.get('/ping', (req: Request, res: Response) => {
+    res.json({ message: 'Ping successful' });
 });
 
 // Start the server
