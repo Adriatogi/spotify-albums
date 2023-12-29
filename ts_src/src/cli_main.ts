@@ -32,7 +32,8 @@ cli
     .description('Get Labels')
     .action(() => {
         let labels: string[] = app.labels
-        console.log(labels)
+        let labels_string: string = labels.join(',');
+        process.stdout.write(labels_string)
     });
 
 cli

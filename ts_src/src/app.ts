@@ -56,7 +56,7 @@ class App {
                 map: recoveredMap,
             }
 
-            console.log("Load successfull")
+            //console.log("Load successfull")
         } else {
             console.log("No save, empty initialization")
         }
