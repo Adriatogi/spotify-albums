@@ -46,9 +46,21 @@ app.get('/labels', async (req: Request, res: Response) => {
 app.post("/labels", async (req: Request, res: Response) => {
     try {
         const label = req.body.label || ""
-        console.log(label)
+        console.log("Adding label: ", label)
         const stdout: string = await executeCommand(cli, 'al', label)
         res.status(200).json({ message: `Successfully posted label: ${label}` });
+    } catch (error) {
+        console.error(`Error: ${error.message}`);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+})
+
+app.delete("/labels/:label", async (req: Request, res: Response) => {
+    try {
+        const label = req.params.label;
+        console.log("Deleting: ", label)
+        const stdout: string = await executeCommand(cli, 'dl', label)
+        res.status(200).json({ message: `Successfully deleted label: ${label}` });
     } catch (error) {
         console.error(`Error: ${error.message}`);
         res.status(500).json({ error: 'Internal Server Error' });
