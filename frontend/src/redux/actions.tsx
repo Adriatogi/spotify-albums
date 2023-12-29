@@ -58,7 +58,7 @@ export const postLabel = (formData: any) => {
         try {
             const response = await fetch("/labels", {
                 method: 'POST',
-                body: formData
+                body: new URLSearchParams(formData),
             })
 
             if (!response.ok) {
@@ -140,7 +140,7 @@ export const postMap = (formData: any) => {
         try {
             const response = await fetch("/maps", {
                 method: 'POST',
-                body: formData
+                body: new URLSearchParams(formData)
             })
 
             if (!response.ok) {

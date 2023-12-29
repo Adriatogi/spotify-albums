@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import { exec } from 'child_process'
 
 const app = express();
-const port = 3000;
+const port = 3001;
 const cli = 'node dist/cli_main.js '
 
 // form that posts needs to be x-www-form-urlencoded
@@ -34,7 +34,7 @@ app.get('/ping', (req: Request, res: Response) => {
 app.get('/labels', async (req: Request, res: Response) => {
     try {
         const stdout: string = await executeCommand(cli + 'gl')
-        const labels = stdout.split(',')
+        const labels = stdout.split(',').filter(item => item !== "")
         console.log("labels", labels)
         res.json({ labels: labels })
     } catch (error) {
