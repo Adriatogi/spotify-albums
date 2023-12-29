@@ -5,9 +5,14 @@ const app = express();
 const port = 3000;
 const cli = 'node dist/cli_main.js '
 
-const executeCommand = (command: string): Promise<string> => {
+// form that posts needs to be x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
+
+const executeCommand = (command: string, ...args: string[]): Promise<string> => {
     return new Promise((resolve, reject) => {
-        exec(command, (error, stdout, stderr) => {
+        const completeCommand = command + args.join(" ")
+
+        exec(completeCommand, (error, stdout, stderr) => {
             if (error || stderr) {
                 reject(error || new Error(stderr))
             } else {
@@ -22,7 +27,6 @@ app.get('/', (req: Request, res: Response) => {
     res.send("Hello from spotify albums!");
 });
 
-// Define a route
 app.get('/ping', (req: Request, res: Response) => {
     res.json({ message: 'Ping successful' });
 });
@@ -33,6 +37,18 @@ app.get('/labels', async (req: Request, res: Response) => {
         const labels = stdout.split(',')
         console.log("labels", labels)
         res.json({ labels: labels })
+    } catch (error) {
+        console.error(`Error: ${error.message}`);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+})
+
+app.post("/labels", async (req: Request, res: Response) => {
+    try {
+        const label = req.body.label || ""
+        console.log(label)
+        const stdout: string = await executeCommand(cli, 'al', label)
+        res.status(200).json({ message: `Successfully posted label: ${label}` });
     } catch (error) {
         console.error(`Error: ${error.message}`);
         res.status(500).json({ error: 'Internal Server Error' });

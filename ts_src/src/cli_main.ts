@@ -22,7 +22,10 @@ cli
     .description('Add Label')
     .action((label: string) => {
         let labels: string[] = app.labels
-        labels.push(label)
+        if (!labels.includes(label)) {
+            labels.push(label)
+        }
+
         app.save()
     });
 
