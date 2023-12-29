@@ -5,7 +5,7 @@ const app = express();
 const port = 3000;
 const cli = 'node dist/cli_main.js '
 
-const exectuteCommand = (command: string): Promise<string> => {
+const executeCommand = (command: string): Promise<string> => {
     return new Promise((resolve, reject) => {
         exec(command, (error, stdout, stderr) => {
             if (error || stderr) {
@@ -29,7 +29,7 @@ app.get('/ping', (req: Request, res: Response) => {
 
 app.get('/labels', async (req: Request, res: Response) => {
     try {
-        const stdout: string = await exectuteCommand(cli + 'gl')
+        const stdout: string = await executeCommand(cli + 'gl')
         const labels = stdout.split(',')
         console.log("labels", labels)
         res.json({ labels: labels })
